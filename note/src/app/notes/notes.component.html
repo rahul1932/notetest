@@ -1,15 +1,25 @@
 <div class="pageTitle">
   <span>Notes</span>
-  <a href="javascript:void(0)" title="New Note" *ngIf="!isAddNew" (click)="addNewNote()">
+  <a href="javascript:void(0)" title="New Note" *ngIf="!isAddNew" (click)="addNote()">
     <i class="fa fa-plus"></i>
   </a>
 </div>
 
 <div id="divNotes">
   <div id="divNotesContent" *ngIf="!isAddNew">
-    
+    <ul id="ulNoteList">
+      <li *ngFor='let note of noteList' (click)='modifyNote(note)'>
+        {{note.name}}
+      </li>
+    </ul>
   </div>
-  <div id="divAddNewNote" *ngIf="isAddNew">
-    <button class="btnCancel" (click)="addNewNote()">Cancel</button>
+  <div id="divAddEditNote" *ngIf="isAddNew" class="row">
+    <div class="col-xs-2">
+      <input type="text" class="form-control" name="txtNoteName" id="txtNoteName" [ngModel]="selectedNote.name">
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-success" (click)="addEditNote()">Save</button>
+      <button class="btn btn-danger" (click)="addEditNote()">Cancel</button>
+    </div>
   </div>
 </div>

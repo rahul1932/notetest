@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'notebooks',
     component: NotebooksComponent
+  },
+  {
+    path: 'tags',
+    component: NotebooksComponent
   }
 ];
 
