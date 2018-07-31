@@ -1,0 +1,15 @@
+<div class="pageTitle">
+  <span>Notes</span>
+  <a href="javascript:void(0)" title="New Note" *ngIf="!isAddNew" (click)="addNewNote()">
+    <i class="fa fa-plus"></i>
+  </a>
+</div>
+
+<div id="divNotes">
+  <div id="divNotesContent" *ngIf="!isAddNew">
+    
+  </div>
+  <div id="divAddNewNote" *ngIf="isAddNew">
+    <button class="btnCancel" (click)="addNewNote()">Cancel</button>
+  </div>
+</div>
