@@ -15,10 +15,10 @@
   </div>
   <div id="divAddEditNote" *ngIf="isAddNew" class="row">
     <div class="col-xs-2">
-      <input type="text" class="form-control" name="txtNoteName" id="txtNoteName" [ngModel]="selectedNote.name">
+      <input type="text" class="form-control" name="txtNoteName" id="txtNoteName" [(ngModel)]="selectedNote.name" #test>
     </div>
     <div class="col-xs-2">
-      <button class="btn btn-success" (click)="addEditNote()">Save</button>
+      <button class="btn btn-success" (click)="saveNote(selectedNote)">Save</button>
       <button class="btn btn-danger" (click)="addEditNote()">Cancel</button>
     </div>
   </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-notes',
@@ -6,6 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
+  //@ViewChild('test') test: any;
   isAddNew = false;
   selectedNote: any;
   noteList: any[];
@@ -13,77 +15,17 @@ export class NotesComponent implements OnInit {
   constructor() {
     this.noteList = [
       {
+        id: 1,
         name: "A"
       },
       {
+        id: 2,
         name: "B"
       },
       {
+        id: 3,
         name: "C"
       },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // },
-      // {
-      //   name: "A"
-      // },
-      // {
-      //   name: "B"
-      // },
-      // {
-      //   name: "C"
-      // }
     ];
   }
 
@@ -92,6 +34,10 @@ export class NotesComponent implements OnInit {
 
   addEditNote() {
     this.isAddNew = !this.isAddNew;
+    if (this.isAddNew) {
+      //debugger
+      //this.test.nativeElement.focus();
+    }
   }
 
   modifyNote(note: any) {
@@ -101,6 +47,15 @@ export class NotesComponent implements OnInit {
 
   addNote() {
     this.addEditNote();
-    this.selectedNote = null;
+    this.selectedNote = {id:0,name:''};
+  }
+
+  saveNote(note: any) {
+    debugger
+    if (note.id == 0) {
+      note.id = this.noteList.length;
+      this.noteList.push(note);
+    }
+    this.addEditNote();
   }
 }
