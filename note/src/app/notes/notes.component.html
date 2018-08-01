@@ -7,18 +7,50 @@
 
 <div id="divNotes">
   <div id="divNotesContent" *ngIf="!isAddNew">
-    <ul id="ulNoteList">
+    <!-- <ul id="ulNoteList">
       <li *ngFor='let note of noteList' (click)='modifyNote(note)'>
         {{note.name}}
       </li>
-    </ul>
+    </ul> -->
+    <div class="table-responsive container">
+      <div class="row">
+        <div class="col-xs-4 col-xs-offset-8">
+          <input type="text" class="form-control form-group" name="txtSearchNote" [(ngModel)]='searchNote' placeholder="Search">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table table-striped table-hover table-bordered" id='tblNotes'>
+            <thead>
+              <tr>
+                <th class="sortable" (click)='sortNote="name"'>Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let note of noteList | filterNote:searchNote | sortBy:sortNote'>
+                <td>{{note.name}}</td>
+                <td>
+                  <a href="javascript:void(0)" title="Modify" (click)='modifyNote(note)' style="margin-right: 10px;">
+                    <i class="fa fa-pencil"></i>
+                  </a>
+                  <a href="javascript:void(0)" title="Delete" (click)='deleteNote(note)'>
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
   <div id="divAddEditNote" *ngIf="isAddNew" class="row">
     <div class="col-xs-2">
-      <input type="text" class="form-control" name="txtNoteName" id="txtNoteName" [(ngModel)]="selectedNote.name" #test>
+      <input type="text" class="form-control" name="txtNoteName" id="txtNoteName" [ngModel]="selectedNote.name" #txtNoteName>
     </div>
     <div class="col-xs-2">
-      <button class="btn btn-success" (click)="saveNote(selectedNote)">Save</button>
+      <button class="btn btn-success" (click)="saveNote(selectedNote,txtNoteName.value)">Save</button>
       <button class="btn btn-danger" (click)="addEditNote()">Cancel</button>
     </div>
   </div>

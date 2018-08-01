@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { not } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-notes',
@@ -7,9 +6,10 @@ import { not } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-  //@ViewChild('test') test: any;
+  //@ViewChild('txtNoteName') txtNoteName: any;
   isAddNew = false;
   selectedNote: any;
+  sortNote: any;
   noteList: any[];
 
   constructor() {
@@ -29,14 +29,13 @@ export class NotesComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   addEditNote() {
     this.isAddNew = !this.isAddNew;
     if (this.isAddNew) {
       //debugger
-      //this.test.nativeElement.focus();
+      //this.txtNoteName.nativeElement.focus();
     }
   }
 
@@ -47,15 +46,30 @@ export class NotesComponent implements OnInit {
 
   addNote() {
     this.addEditNote();
-    this.selectedNote = {id:0,name:''};
+    this.selectedNote = { id: 0, name: '' };
   }
 
-  saveNote(note: any) {
-    debugger
+  saveNote(note: any, noteName: any) {
     if (note.id == 0) {
       note.id = this.noteList.length;
+      note.name = noteName;
       this.noteList.push(note);
+    } else {
+      for (let i = 0; i < this.noteList.length; i++) {
+        if (this.noteList[i].id == note.id) {
+          this.noteList[i].name = noteName;
+        }
+      }
     }
     this.addEditNote();
+  }
+
+  deleteNote(note: any) {
+    debugger
+    for (let i = 0; i < this.noteList.length; i++) {
+      if (this.noteList[i].id == note.id) {
+        this.noteList.splice(i,1);
+      }
+    }
   }
 }

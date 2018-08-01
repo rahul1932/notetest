@@ -6,12 +6,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NotesComponent } from './notes/notes.component';
 import { NotebooksComponent } from './notebooks/notebooks.component';
+import { FilterNotesPipe,SortNotesPipe } from './app.pipes';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotesComponent,
-    NotebooksComponent
+    NotebooksComponent,
+    FilterNotesPipe,
+    SortNotesPipe
   ],
   imports: [
     BrowserModule,

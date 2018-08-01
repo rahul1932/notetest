@@ -4,3 +4,22 @@
     <i class="fa fa-plus"></i>
   </a>
 </div>
+
+<div id="divNotebooks">
+  <div id="divNotebooksContent" *ngIf="!isAddNew">
+    <ul id="ulNotebookList">
+      <li *ngFor='let notebook of notebookList' (click)='modifyNotebook(notebook)'>
+        {{notebook.name}}
+      </li>
+    </ul>
+  </div>
+  <div id="divAddEditNotebook" *ngIf="isAddNew" class="row">
+    <div class="col-xs-2">
+      <input type="text" class="form-control" name="txtNotebookName" id="txtNotebookName" [ngModel]="selectedNotebook.name" #txtNotebookName>
+    </div>
+    <div class="col-xs-2">
+      <button class="btn btn-success" (click)="saveNotebook(selectedNotebook,txtNotebookName.value)">Save</button>
+      <button class="btn btn-danger" (click)="addEditNotebook()">Cancel</button>
+    </div>
+  </div>
+</div>
