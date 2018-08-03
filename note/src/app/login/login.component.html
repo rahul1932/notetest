@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4">
+      <div class="account-wall">
+        <div id="my-tab-content" class="tab-content">
+          <div class="tab-pane active" id="login">
+            <h2 class="text-center">Login</h2>
+            <form class="form-signin" (ngSubmit)="login()" #login="ngForm">
+              <input type="text" class="form-control" placeholder="Username" name="userName" required autofocus ngModel>
+              <input type="password" class="form-control" placeholder="Password" name="password" required ngModel>
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="login.invalid">Submit</button>
+            </form>
+            <div id="tabs" data-tabs="tabs">
+              <p class="text-center">
+                <a href="#register" data-toggle="tab">Need an Account?</a>
+              </p>
+            </div>
+          </div>
+          <div class="tab-pane" id="register">
+            <h2 class="text-center">Signup</h2>
+            <form class="form-signin" (ngSubmit)="signup()" #signup="ngForm">
+              <input type="text" class="form-control" placeholder="User Name" name="usernameSignup" required autofocus [(ngModel)]="usernameSignup.email"
+                #usernameSignup="ngModel">
+              <input type="email" class="form-control" placeholder="Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                required [(ngModel)]="model.email" #email="ngModel">
+              <input type="password" class="form-control" placeholder="Password" name="passwordSignup" minlength="6" required [(ngModel)]="model.passwordSignup"
+                #passwordSignup="ngModel">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="signup.invalid">Submit</button>
+            </form>
+            <div id="tabs" data-tabs="tabs">
+              <p class="text-center">
+                <a href="#login" data-toggle="tab">Have an Account?</a>
+              </p>
+            </div>
+
+            <div class="alert alert-danger" *ngIf="signup.dirty && !signup.isvalid" style="margin: 15px;">
+              <div *ngIf="usernameSignup.invalid && (usernameSignup.dirty || usernameSignup.touched)">
+                <div *ngIf="usernameSignup.errors.required">
+                  Username is required.
+                </div>
+              </div>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div *ngIf="email.errors.required">
+                  Email is required.
+                </div>
+              </div>
+              <div *ngIf="passwordSignup.invalid && (passwordSignup.dirty || passwordSignup.touched)">
+                <div *ngIf="passwordSignup.errors.required">
+                  Password is required.
+                </div>
+                <div *ngIf="passwordSignup.errors.minlength">
+                  Password must be at least 6 characters long.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
