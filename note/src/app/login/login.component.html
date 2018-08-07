@@ -18,8 +18,16 @@
           </div>
           <div class="tab-pane" id="register">
             <h2 class="text-center">Signup</h2>
-            <form class="form-signin" (ngSubmit)="signup()" #signup="ngForm">
-              <input type="text" class="form-control" placeholder="User Name" name="usernameSignup" required autofocus [(ngModel)]="usernameSignup.email"
+            <form class="form-signup" (ngSubmit)="signup()" #signup="ngForm">
+              <input type="text" class="form-control" placeholder="First Name" name="firstName" required autofocus [(ngModel)]="model.firstName"
+                #firstName="ngModel">
+              <input type="text" class="form-control" placeholder="Last Name" name="lastName" required [(ngModel)]="model.lastName"
+                #lastName="ngModel">
+              <div class="divGender text-center">
+                <input type="radio" name="signupGeneder" id="M" value="M" required [(ngModel)]="model.gender" #genderM="ngModel"> Male
+                <input type="radio" name="signupGeneder" id="F" value="F" required [(ngModel)]="model.gender" #genderF="ngModel"> Female
+              </div>
+              <input type="text" class="form-control" placeholder="User Name" name="usernameSignup" required [(ngModel)]="model.usernameSignup"
                 #usernameSignup="ngModel">
               <input type="email" class="form-control" placeholder="Email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 required [(ngModel)]="model.email" #email="ngModel">
@@ -34,6 +42,16 @@
             </div>
 
             <div class="alert alert-danger" *ngIf="signup.dirty && !signup.isvalid" style="margin: 15px;">
+                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                    <div *ngIf="firstName.errors.required">
+                      First Name is required.
+                    </div>
+                  </div>
+                  <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                      <div *ngIf="lastName.errors.required">
+                        Last Name is required.
+                      </div>
+                    </div>
               <div *ngIf="usernameSignup.invalid && (usernameSignup.dirty || usernameSignup.touched)">
                 <div *ngIf="usernameSignup.errors.required">
                   Username is required.
